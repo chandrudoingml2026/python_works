@@ -1,0 +1,23 @@
+import sqlalchemy
+import pandas as pd
+from sqlalchemy import create_engine
+username  =  
+password  =  
+host      =  
+db        = 'chandb'
+table = 'stg_branches'
+
+engine = sqlalchemy.create_engine(f"mysql+pymysql://{username}:{password}@{host}:3306/{db}")
+folder="E:\\Inceptez Data Modeling\\bfsi_dataset\\branches.csv"
+df=pd.read_csv(folder)
+df.to_sql(table,con=engine,index=False,if_exists="replace")
+print(f"Rows loaded into table: {table}")
+query1 = f"SELECT count(*) FROM {table};"
+
+count = pd.read_sql(query1, con=engine)
+print(f"no of Rows loaded into table: {count}")
+
+query2 = f"SELECT * FROM {table} LIMIT 10;"
+
+result = pd.read_sql(query2, con=engine)
+print(f"no of Rows loaded into table: {result}")
