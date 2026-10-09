@@ -49,7 +49,7 @@ def banking_eligibility():
     """Determine the account type based on age and monthly income."""
     age = int(input("Enter age: "))
     income = float(input("Enter monthly income: "))
-
+ 
     if age < 18:
         print("Not eligible for a bank account.")
     elif income < 15000:
